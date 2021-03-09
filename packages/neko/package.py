@@ -24,7 +24,7 @@ class Neko(AutotoolsPackage):
     depends_on('m4',       type='build')
     depends_on('pkgconf',  type='build')
     depends_on('parmetis', when='+parmetis')
-    depends_on('xsmm',     when='+libxsmm')
+    depends_on('libxsmm',  when='+xsmm')
     depends_on('mpi')
     depends_on('blas')
     depends_on('lapack')
