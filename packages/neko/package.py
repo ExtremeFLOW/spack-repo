@@ -15,6 +15,7 @@ class Neko(AutotoolsPackage):
     maintainers = ['njansson']
 
     version('0.1.0', tag='v0.1.0')
+    version('develop', branch='develop')
     variant('parmetis', default=False, description='Compile with support for parmetis')
     variant('xsmm', default=False, description='Compile with support for libxsmm')
     
