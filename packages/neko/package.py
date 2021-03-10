@@ -36,3 +36,4 @@ class Neko(AutotoolsPackage):
         if '+xsmm' in self.spec:
             args.append('--with-libxsmm')
 
+        return args
