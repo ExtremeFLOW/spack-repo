@@ -10,10 +10,11 @@ class Neko(AutotoolsPackage):
     """N E K O"""
 
     homepage = "https://github.com/ExtremeFLOW/neko"
-    git      = "git@github.com:ExtremeFLOW/neko.git"
+    git      = "https://github.com/ExtremeFLOW/neko.git"
 
     maintainers = ['njansson']
 
+    version('0.2.0', tag='v0.2.0')
     version('0.1.3', tag='v0.1.3')
     version('0.1.2', tag='v0.1.2')
     version('0.1.1', tag='v0.1.1')
