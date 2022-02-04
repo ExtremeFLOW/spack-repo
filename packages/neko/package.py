@@ -6,7 +6,7 @@
 from spack import *
 
 
-class Neko(AutotoolsPackage):
+class Neko(AutotoolsPackage,CudaPackage):
     """N E K O"""
 
     homepage = "https://github.com/ExtremeFLOW/neko"
@@ -22,8 +22,8 @@ class Neko(AutotoolsPackage):
     version('0.1.1', tag='v0.1.1')
     version('0.1.0', tag='v0.1.0')
     version('develop', branch='develop')
-    variant('parmetis', default=False, description='Compile with support for parmetis')
-    variant('xsmm', default=False, description='Compile with support for libxsmm')
+    variant('parmetis', default=False, description='Build with support for parmetis')
+    variant('xsmm', default=False, description='Build with support for libxsmm')
     
     depends_on('autoconf', type='build')
     depends_on('automake', type='build')
@@ -36,11 +36,15 @@ class Neko(AutotoolsPackage):
     depends_on('blas')
     depends_on('lapack')
 
+    conflicts('+xsmm', when='+cuda')
+
     def configure_args(self):
         args = []
         if '+parmetis' in self.spec:
             args.append('--with-parmetis')
         if '+xsmm' in self.spec:
             args.append('--with-libxsmm')
+        if '+cuda' in self.spec:
+            args.append('--with-cuda={0}'.format(self.spec['cuda'].prefix))
 
         return args
