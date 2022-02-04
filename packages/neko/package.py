@@ -6,7 +6,7 @@
 from spack import *
 
 
-class Neko(AutotoolsPackage,CudaPackage):
+class Neko(AutotoolsPackage,CudaPackage,ROCmPackage):
     """N E K O"""
 
     homepage = "https://github.com/ExtremeFLOW/neko"
@@ -14,6 +14,7 @@ class Neko(AutotoolsPackage,CudaPackage):
 
     maintainers = ['njansson']
 
+    version('0.3.0', tag='v0.3.0')
     version('0.2.2', tag='v0.2.2')
     version('0.2.1', tag='v0.2.1')
     version('0.2.0', tag='v0.2.0')
@@ -37,6 +38,7 @@ class Neko(AutotoolsPackage,CudaPackage):
     depends_on('lapack')
 
     conflicts('+xsmm', when='+cuda')
+    conflicts('+rocm', when='+cuda')
 
     def configure_args(self):
         args = []
@@ -46,5 +48,7 @@ class Neko(AutotoolsPackage,CudaPackage):
             args.append('--with-libxsmm')
         if '+cuda' in self.spec:
             args.append('--with-cuda={0}'.format(self.spec['cuda'].prefix))
+        if '+rocm' in self.spec:
+            args.append('--with-hip={0}'.format(self.spec['hip'].prefix))
 
         return args
